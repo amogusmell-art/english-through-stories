@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Through Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #10131a;
+  --bg-card: #171c27;
+  --bg-card-hover: #1c2333;
+  --border: #262c3b;
+  --text: #edeff3;
+  --text-muted: #8b93a6;
+  --text-faint: #5b6376;
+  --accent-movie: #e3a544;
+  --accent-series: #4fc3a1;
+  --accent-game: #a78bfa;
+  --accent-primary: #e3a544;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --radius: 10px;
+  --max-width: 1080px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:var(--font-body); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+.wrap { max-width:var(--max-width); margin:0 auto; padding:0 24px; }
+.site-nav { border-bottom:1px solid var(--border); }
+.site-nav .wrap { display:flex; align-items:center; justify-content:space-between; padding:20px 24px; }
+.logo { font-family:var(--font-display); font-size:1.25rem; font-weight:600; text-decoration:none; color:var(--text); cursor:pointer; background:none; border:none; padding:0; }
+.logo span { color:var(--accent-primary); }
+.back-link { display:inline-flex; align-items:center; gap:8px; color:var(--text-muted); text-decoration:none; font-size:0.9rem; background:none; border:none; cursor:pointer; font-family:var(--font-body); padding:0; }
+.back-link:hover { color:var(--text); }
+.hero { padding:96px 0 56px; border-bottom:1px solid var(--border); }
+.hero h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2.2rem,5vw,3.4rem); line-height:1.15; max-width:14ch; margin:0 0 24px; }
+.hero p { color:var(--text-muted); max-width:56ch; font-size:1.05rem; margin:0 0 12px; }
+.hero .meta-line { margin-top:32px; font-family:var(--font-mono); font-size:0.85rem; color:var(--text-faint); }
+.filters { display:flex; gap:10px; flex-wrap:wrap; padding:32px 0; }
+.filter-btn { font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); background:transparent; border:1px solid var(--border); border-radius:999px; padding:8px 18px; cursor:pointer; transition:border-color .15s ease,color .15s ease; }
+.filter-btn:hover { color:var(--text); border-color:var(--text-faint); }
+.filter-btn.active { color:var(--bg); background:var(--accent-primary); border-color:var(--accent-primary); }
+.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding-bottom:96px; }
+@media (max-width:860px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:600px){ .grid{ grid-template-columns:1fr; } }
+.card { background:var(--bg-card); border:1px solid var(--border); border-left:3px solid var(--cat-color,var(--accent-primary)); border-radius:var(--radius); padding:24px; text-decoration:none; color:var(--text); display:flex; flex-direction:column; gap:14px; transition:transform .15s ease,background .15s ease; cursor:pointer; text-align:left; width:100%; font-family:var(--font-body); }
+.card:hover { background:var(--bg-card-hover); transform:translateY(-2px); }
+.card[data-cat="movie"] { --cat-color:var(--accent-movie); }
+.card[data-cat="series"] { --cat-color:var(--accent-series); }
+.card[data-cat="game"] { --cat-color:var(--accent-game); }
+.tag { display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; color:var(--cat-color,var(--text-muted)); width:fit-content; }
+.tag::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--cat-color,var(--text-muted)); }
+.card h3 { font-family:var(--font-display); font-size:1.3rem; font-weight:600; margin:0; }
+.card p { color:var(--text-muted); font-size:0.92rem; margin:0; }
+.card .explore { margin-top:auto; font-size:0.85rem; color:var(--text-faint); }
+.title-header { padding:48px 0 40px; border-bottom:1px solid var(--border); }
+.title-header h1 { font-family:var(--font-display); font-size:clamp(2rem,4.5vw,3rem); font-weight:600; margin:16px 0 12px; }
+.title-header .hook { color:var(--text-muted); font-size:1.05rem; max-width:60ch; }
+.section { padding:48px 0; border-bottom:1px solid var(--border); }
+.section:last-of-type { border-bottom:none; }
+.section h2 { font-family:var(--font-display); font-size:1.5rem; font-weight:600; margin:0 0 24px; }
+.about-text { color:var(--text-muted); max-width:68ch; }
+.vocab-list { display:grid; gap:18px; }
+.vocab-item { display:grid; grid-template-columns:200px 1fr; gap:20px; padding-bottom:18px; border-bottom:1px solid var(--border); }
+.vocab-item:last-child { border-bottom:none; padding-bottom:0; }
+.vocab-term { font-family:var(--font-mono); font-weight:500; color:var(--text); }
+.vocab-def { color:var(--text-muted); font-size:0.95rem; }
+.vocab-example { display:block; margin-top:6px; color:var(--text-faint); font-style:italic; }
+@media (max-width:640px){ .vocab-item{ grid-template-columns:1fr; gap:6px; } }
+.dialogue { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px 32px; font-family:var(--font-mono); font-size:0.95rem; }
+.dialogue p { margin:0 0 14px; color:var(--text); }
+.dialogue p:last-child { margin-bottom:0; }
+.dialogue .speaker { color:var(--accent-primary); margin-right:8px; }
+.dialogue-note { margin-top:14px; color:var(--text-faint); font-size:0.85rem; font-family:var(--font-body); }
+.phrase-list { display:grid; gap:14px; }
+.phrase-item { padding:16px 20px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); }
+.phrase-item .phrase { font-weight:600; margin-right:10px; }
+.phrase-item .meaning { color:var(--text-muted); font-size:0.92rem; }
+.page-nav { padding:48px 0 80px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.page-nav button { text-decoration:none; color:var(--text-muted); font-size:0.9rem; background:none; border:none; cursor:pointer; font-family:var(--font-body); padding:0; }
+.page-nav button:hover { color:var(--text); }
+.site-footer { border-top:1px solid var(--border); padding:32px 0; color:var(--text-faint); font-size:0.85rem; }
+.view { display:none; }
+.view.active { display:block; }
+
+/* ---------- Poll ---------- */
+.poll-wrap { padding-bottom:64px; }
+.poll-embed { width:100%; height:760px; border:1px solid var(--border); border-radius:var(--radius); background:#fff; margin-top:32px; }
+@media (max-width:640px){ .poll-embed{ height:900px; } }
+.poll-question { padding:40px 0; border-bottom:1px solid var(--border); }
+.poll-question:first-child { padding-top:0; }
+.poll-question h2 { font-family:var(--font-display); font-size:1.4rem; font-weight:600; margin:0 0 20px; }
+.poll-options { display:flex; flex-wrap:wrap; gap:10px; }
+.poll-option { font-family:var(--font-body); font-size:0.92rem; color:var(--text); background:var(--bg-card); border:1px solid var(--border); border-radius:999px; padding:10px 20px; cursor:pointer; transition:border-color .15s ease, background .15s ease; }
+.poll-option:hover:not(.disabled) { border-color:var(--accent-primary); }
+.poll-option.selected { background:var(--accent-primary); color:var(--bg); border-color:var(--accent-primary); font-weight:600; }
+.poll-option.disabled { cursor:default; opacity:0.75; }
+.poll-results { margin-top:26px; display:flex; flex-direction:column; gap:12px; }
+.result-row { display:grid; grid-template-columns:220px 1fr 48px; align-items:center; gap:14px; }
+.result-label { font-size:0.9rem; color:var(--text-muted); }
+.result-bar-track { background:var(--bg-card); border:1px solid var(--border); border-radius:6px; height:10px; overflow:hidden; }
+.result-bar-fill { background:var(--accent-primary); height:100%; border-radius:6px; transition:width .4s ease; }
+.result-pct { font-family:var(--font-mono); font-size:0.85rem; color:var(--text-faint); text-align:right; }
+.result-total { color:var(--text-faint); font-size:0.82rem; margin-top:4px; }
+@media (max-width:640px){ .result-row{ grid-template-columns:1fr; gap:4px; } .result-pct{ text-align:left; } }
+.poll-continue { padding:40px 0 8px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+.continue-btn { font-family:var(--font-body); font-size:0.95rem; font-weight:600; color:var(--bg); background:var(--accent-primary); border:none; border-radius:999px; padding:12px 26px; cursor:pointer; }
+.skip-link { background:none; border:none; color:var(--text-faint); font-size:0.9rem; cursor:pointer; font-family:var(--font-body); text-decoration:underline; padding:0; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <button class="logo" onclick="showView('home')">English Through <span>Stories</span></button>
+  </div>
+</nav>
+
+<!-- POLL VIEW -->
+<div id="view-poll" class="view active">
+  <header class="hero" style="padding-bottom:0;">
+    <div class="wrap">
+      <h1>Quick poll before you start</h1>
+      <p>Two questions — this is a real, live survey. Your answer is added to everyone else's.</p>
+    </div>
+  </header>
+  <main class="wrap poll-wrap">
+    <iframe class="poll-embed"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdwRqPLCKYuF08cbz4HMGITzWcaa1C1_A7N06SoZjQHpsx1cg/viewform?embedded=true"
+      loading="lazy">Loading…</iframe>
+    <div class="poll-continue">
+      <button class="continue-btn" onclick="showView('home')">Continue to the site &rarr;</button>
+      <button class="skip-link" onclick="showView('home')">Skip for now</button>
+    </div>
+  </main>
+</div>
+
+<!-- HOME VIEW -->
+<div id="view-home" class="view">
+  <header class="hero">
+    <div class="wrap">
+      <h1>Learn English through the movies, shows and games you'd watch anyway</h1>
+      <p>Every title on this site comes with a short summary, key vocabulary tied to its world, a practice dialogue, and useful phrases you can start using today.</p>
+      <div class="meta-line">9 titles &middot; movies / series / games &middot; all material in English</div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="section" style="padding-top:0;">
+      <h2>Practical part of the project</h2>
+      <p class="about-text">As part of the practical section, an interactive website was created to help students learn English through movies, series and games. The project includes vocabulary, practice dialogues and useful phrases. A short survey was also conducted to collect learners' opinions and evaluate the usefulness of this approach.</p>
+      <p style="margin-top:24px;">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdwRqPLCKYuF08cbz4HMGITzWcaa1C1_A7N06SoZjQHpsx1cg/viewform" target="_blank" rel="noopener" style="display:inline-block; color:var(--bg); background:var(--accent-primary); text-decoration:none; border-radius:999px; padding:12px 24px; font-weight:600;">Open the project survey &rarr;</a>
+      </p>
+    </section>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all" onclick="filterCards('all', this)">All</button>
+      <button class="filter-btn" data-filter="movie" onclick="filterCards('movie', this)">Movies</button>
+      <button class="filter-btn" data-filter="series" onclick="filterCards('series', this)">Series</button>
+      <button class="filter-btn" data-filter="game" onclick="filterCards('game', this)">Games</button>
+    </div>
+    <div class="grid" id="card-grid">
+      <button class="card" data-cat="movie" onclick="showView('forrest-gump')">
+        <span class="tag">Movie</span>
+        <h3>Forrest Gump</h3>
+        <p>A gentle, reflective narration style — simple sentences, clear pacing, big themes.</p>
+        <span class="explore">Explore</span>
+      </button>
+      <button class="card" data-cat="movie" onclick="showView('inception')">
+        <span class="tag">Movie</span>
+        <h3>Inception</h3>
+        <p>A dream-heist thriller packed with vocabulary around ideas, subconscious minds, and architecture.</p>
+        <span class="explore">Explore</span>
+      </button>
+      <button class="card" data-cat="movie" onclick="showView('happyness')">
+        <span class="tag">Movie</span>
+        <h3>The Pursuit of Happyness</h3>
+        <p>A biographical drama about perseverance — vocabulary around job interviews, finance, and everyday struggle.</p>
+        <span class="explore">Explore</span>
+      </button>
+      <button class="card" data-cat="series" onclick="showView('friends')">
+        <span class="tag">Series</span>
+        <h3>Friends</h3>
+        <p>The gold standard for conversational English — banter, sarcasm, everyday situations.</p>
+        <span class="explore">Explore</span>
+      </button>
+      <button class="card" data-cat="series" onclick="showView('sherlock')">
+        <span class="tag">Series</span>
+        <h3>Sherlock</h3>
+        <p>Sharp British English and detective vocabulary — deduction, evidence, fast-paced dialogue.</p>
+        <span class="explore">Explore</span>
+      </button>
+      <button class="card" data-cat="series" onclick="showView('stranger')">
+        <span class="tag">Series</span>
+        <h3>Stranger Things</h3>
+        <p>1980s small-town America, supernatural mystery, and the casual speech of a group of kids.</p>
+        <span class="explore">Explore</span>
+      </button>
+      <button class="card" data-cat="game" onclick="showView('lis')">
+        <span class="tag">Game</span>
+        <h3>Life is Strange</h3>
+        <p>A narrative adventure about choices and consequences — teenage life and small-town vocabulary.</p>
+        <span class="explore">Explore</span>
+      </button>
+      <button class="card" data-cat="game" onclick="showView('portal')">
+        <span class="tag">Game</span>
+        <h3>Portal 2</h3>
+        <p>A puzzle game narrated by a dry, sarcastic AI — irony, understatement, technical phrasing.</p>
+        <span class="explore">Explore</span>
+      </button>
+      <button class="card" data-cat="game" onclick="showView('tlou')">
+        <span class="tag">Game</span>
+        <h3>The Last of Us Part II</h3>
+        <p>A post-apocalyptic survival story — vocabulary around loss, loyalty, and survival.</p>
+        <span class="explore">Explore</span>
+      </button>
+    </div>
+  </main>
+</div>
+
+<!-- FORREST GUMP -->
+<div id="view-forrest-gump" class="view">
+  <header class="title-header"><div class="wrap">
+    <button class="back-link" onclick="showView('home')">&larr; All titles</button>
+    <div><span class="tag" style="--cat-color:var(--accent-movie); margin-top:16px;">Movie</span></div>
+    <h1>Forrest Gump</h1>
+    <p class="hook">A slow, folksy narration and simple sentence structure make this one of the most approachable classics for English learners.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <h2>About</h2>
+    <p class="about-text">The film follows an ordinary man with a low IQ who, through kindness and persistence, finds himself present at major moments in American history. What makes it useful for learners is its narration: short, plain sentences, an even pace, and a narrator who often explains things simply, as if to a listener hearing the story for the first time.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Key vocabulary</h2>
+    <div class="vocab-list">
+      <div class="vocab-item"><span class="vocab-term">childhood sweetheart</span><span class="vocab-def">someone you loved since you were a child<span class="vocab-example">"She was his childhood sweetheart, and he never stopped loving her."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">shrimp boat</span><span class="vocab-def">a small fishing boat used to catch shrimp<span class="vocab-example">"They bought a shrimp boat and started a small business."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">veteran</span><span class="vocab-def">someone who has served in the armed forces<span class="vocab-example">"Many veterans found it hard to adjust to civilian life."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">stock market</span><span class="vocab-def">the system where shares of companies are bought and sold<span class="vocab-example">"He invested his savings in the stock market almost by accident."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">to run cross-country</span><span class="vocab-def">to run long distances across open land, not on a track<span class="vocab-example">"He decided to run cross-country, for no particular reason at all."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">destiny</span><span class="vocab-def">the events that will necessarily happen to someone in the future<span class="vocab-example">"He often wondered whether people control their own destiny."</span></span></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Practice dialogue</h2>
+    <div class="dialogue">
+      <p><span class="speaker">Ray:</span> Why do you run every single morning, rain or shine?</p>
+      <p><span class="speaker">Tom:</span> I don't know. I just started one day, and I kept going.</p>
+      <p><span class="speaker">Ray:</span> Didn't you ever want to stop?</p>
+      <p><span class="speaker">Tom:</span> Sometimes. But then I figured, I'd already come this far.</p>
+      <p><span class="speaker">Ray:</span> That's a strange way to make a decision.</p>
+      <p><span class="speaker">Tom:</span> Maybe. My mama always said, you never really know what's coming next.</p>
+    </div>
+    <p class="dialogue-note">An original practice dialogue written in the calm, plain-spoken style of the film — not a transcript from the movie.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Useful phrases</h2>
+    <div class="phrase-list">
+      <div class="phrase-item"><span class="phrase">against all odds</span><span class="meaning">— despite very low chances of success</span></div>
+      <div class="phrase-item"><span class="phrase">come what may</span><span class="meaning">— whatever happens, no matter the outcome</span></div>
+      <div class="phrase-item"><span class="phrase">to turn a corner</span><span class="meaning">— to reach a point where things start improving</span></div>
+      <div class="phrase-item"><span class="phrase">one thing led to another</span><span class="meaning">— used to describe a chain of events without explaining every step</span></div>
+      <div class="phrase-item"><span class="phrase">to keep going</span><span class="meaning">— to continue despite difficulty</span></div>
+    </div>
+  </div></section>
+  <div class="wrap"><div class="page-nav">
+    <button onclick="showView('tlou')">&larr; The Last of Us Part II</button>
+    <button onclick="showView('inception')">Inception &rarr;</button>
+  </div></div>
+</div>
+
+<!-- INCEPTION -->
+<div id="view-inception" class="view">
+  <header class="title-header"><div class="wrap">
+    <button class="back-link" onclick="showView('home')">&larr; All titles</button>
+    <div><span class="tag" style="--cat-color:var(--accent-movie); margin-top:16px;">Movie</span></div>
+    <h1>Inception</h1>
+    <p class="hook">A dream-heist thriller that mixes technical planning vocabulary with abstract talk about ideas and memory.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <h2>About</h2>
+    <p class="about-text">A team of specialists enters people's dreams to extract — or plant — ideas. The film moves between corporate boardrooms and dream worlds that bend architecture and physics, which gives learners exposure to both formal, businesslike English and more abstract, philosophical language about the mind.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Key vocabulary</h2>
+    <div class="vocab-list">
+      <div class="vocab-item"><span class="vocab-term">subconscious</span><span class="vocab-def">the part of the mind we're not actively aware of<span class="vocab-example">"The idea needs to feel like it came from her own subconscious."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">extraction</span><span class="vocab-def">the act of taking something out, here, an idea from someone's mind<span class="vocab-example">"The extraction has to happen before he wakes up."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">blueprint</span><span class="vocab-def">a detailed technical plan or design<span class="vocab-example">"She drew up the blueprint for the dream's architecture."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">to plant an idea</span><span class="vocab-def">to make someone believe an idea is their own<span class="vocab-example">"It's much harder to plant an idea than to steal one."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">totem</span><span class="vocab-def">a small personal object used to check what's real<span class="vocab-example">"He always carried his totem, just in case."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">labyrinth</span><span class="vocab-def">a complicated network of paths, a maze<span class="vocab-example">"The lower levels of the mind can feel like a labyrinth."</span></span></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Practice dialogue</h2>
+    <div class="dialogue">
+      <p><span class="speaker">Mara:</span> How do we know this idea is really his, and not something we planted?</p>
+      <p><span class="speaker">Dev:</span> We don't. Not for certain. That's the risk.</p>
+      <p><span class="speaker">Mara:</span> If it goes wrong, we can't just wake him up.</p>
+      <p><span class="speaker">Dev:</span> Then we make sure it doesn't go wrong.</p>
+      <p><span class="speaker">Mara:</span> You always say that like it's simple.</p>
+      <p><span class="speaker">Dev:</span> It never is. That's why we plan for every level.</p>
+    </div>
+    <p class="dialogue-note">An original practice dialogue in the film's tense, technical register — not a transcript from the movie.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Useful phrases</h2>
+    <div class="phrase-list">
+      <div class="phrase-item"><span class="phrase">to lose track of</span><span class="meaning">— to no longer know or remember something</span></div>
+      <div class="phrase-item"><span class="phrase">on the same page</span><span class="meaning">— in agreement, understanding each other</span></div>
+      <div class="phrase-item"><span class="phrase">to buy into an idea</span><span class="meaning">— to start believing in or accepting an idea</span></div>
+      <div class="phrase-item"><span class="phrase">a leap of faith</span><span class="meaning">— to trust something without proof it will work</span></div>
+      <div class="phrase-item"><span class="phrase">to cut it close</span><span class="meaning">— to have very little time or margin for error</span></div>
+    </div>
+  </div></section>
+  <div class="wrap"><div class="page-nav">
+    <button onclick="showView('forrest-gump')">&larr; Forrest Gump</button>
+    <button onclick="showView('happyness')">The Pursuit of Happyness &rarr;</button>
+  </div></div>
+</div>
+
+<!-- PURSUIT OF HAPPYNESS -->
+<div id="view-happyness" class="view">
+  <header class="title-header"><div class="wrap">
+    <button class="back-link" onclick="showView('home')">&larr; All titles</button>
+    <div><span class="tag" style="--cat-color:var(--accent-movie); margin-top:16px;">Movie</span></div>
+    <h1>The Pursuit of Happyness</h1>
+    <p class="hook">A biographical drama about perseverance, built on clear, everyday English about work, money, and family.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <h2>About</h2>
+    <p class="about-text">A struggling salesman takes an unpaid internship at a brokerage firm while raising his young son and facing homelessness. The dialogue stays grounded and practical throughout, which makes it a good source of everyday vocabulary around job hunting, finances, and parenting under pressure.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Key vocabulary</h2>
+    <div class="vocab-list">
+      <div class="vocab-item"><span class="vocab-term">internship</span><span class="vocab-def">a temporary position, often unpaid, taken to gain work experience<span class="vocab-example">"Only one intern out of twenty would get the job."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">unpaid</span><span class="vocab-def">not receiving money for work done<span class="vocab-example">"He took the unpaid position hoping it would lead somewhere."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">eviction</span><span class="vocab-def">being forced to leave a place you're renting<span class="vocab-example">"They faced eviction after falling behind on rent."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">résumé</span><span class="vocab-def">a document summarizing your work experience and skills<span class="vocab-example">"He rewrote his résumé the night before the interview."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">stockbroker</span><span class="vocab-def">someone who buys and sells shares for clients<span class="vocab-example">"Becoming a stockbroker required passing a difficult exam."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">perseverance</span><span class="vocab-def">continued effort despite difficulty</span></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Practice dialogue</h2>
+    <div class="dialogue">
+      <p><span class="speaker">Manager:</span> You do realize this internship doesn't pay anything?</p>
+      <p><span class="speaker">Chris:</span> I understand. I still want the chance.</p>
+      <p><span class="speaker">Manager:</span> Most people quit after the first month.</p>
+      <p><span class="speaker">Chris:</span> I'm not most people. I need this to work out.</p>
+      <p><span class="speaker">Manager:</span> Fair enough. Be here at seven tomorrow.</p>
+    </div>
+    <p class="dialogue-note">An original practice dialogue inspired by the film's tone — not a transcript from the movie.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Useful phrases</h2>
+    <div class="phrase-list">
+      <div class="phrase-item"><span class="phrase">to make ends meet</span><span class="meaning">— to have just enough money to cover basic needs</span></div>
+      <div class="phrase-item"><span class="phrase">to fall behind</span><span class="meaning">— to stop keeping up with payments, work, or a schedule</span></div>
+      <div class="phrase-item"><span class="phrase">to land a job</span><span class="meaning">— to successfully get a job</span></div>
+      <div class="phrase-item"><span class="phrase">against the odds</span><span class="meaning">— despite a low chance of success</span></div>
+      <div class="phrase-item"><span class="phrase">to work things out</span><span class="meaning">— to find a solution to a difficult situation</span></div>
+    </div>
+  </div></section>
+  <div class="wrap"><div class="page-nav">
+    <button onclick="showView('inception')">&larr; Inception</button>
+    <button onclick="showView('friends')">Friends &rarr;</button>
+  </div></div>
+</div>
+
+<!-- FRIENDS -->
+<div id="view-friends" class="view">
+  <header class="title-header"><div class="wrap">
+    <button class="back-link" onclick="showView('home')">&larr; All titles</button>
+    <div><span class="tag" style="--cat-color:var(--accent-series); margin-top:16px;">Series</span></div>
+    <h1>Friends</h1>
+    <p class="hook">Widely used to teach conversational English — banter, sarcasm, and the rhythm of everyday speech.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <h2>About</h2>
+    <p class="about-text">The sitcom follows six friends navigating jobs, relationships, and daily life in New York, mostly across a shared apartment and a coffee shop. Because so much of the show is dialogue-driven and set in ordinary situations, it's one of the most commonly recommended shows for practicing natural, spoken English.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Key vocabulary</h2>
+    <div class="vocab-list">
+      <div class="vocab-item"><span class="vocab-term">roommate</span><span class="vocab-def">someone you share a home with<span class="vocab-example">"Finding a good roommate can be harder than finding an apartment."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">breakup</span><span class="vocab-def">the end of a romantic relationship<span class="vocab-example">"She was still upset about the breakup a week later."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">to hang out</span><span class="vocab-def">to spend casual time with someone<span class="vocab-example">"Do you want to hang out this weekend?"</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">awkward</span><span class="vocab-def">uncomfortable or embarrassing<span class="vocab-example">"The silence at dinner was incredibly awkward."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">sarcasm</span><span class="vocab-def">saying the opposite of what you mean, usually to joke or mock<span class="vocab-example">"You could hear the sarcasm in his voice."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">banter</span><span class="vocab-def">playful, teasing conversation between people who know each other well</span></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Practice dialogue</h2>
+    <div class="dialogue">
+      <p><span class="speaker">Jamie:</span> So how was the date?</p>
+      <p><span class="speaker">Alex:</span> Oh, it was great, if you enjoy talking about someone's ex for two hours.</p>
+      <p><span class="speaker">Jamie:</span> That bad?</p>
+      <p><span class="speaker">Alex:</span> I've had more fun waiting for the bus.</p>
+      <p><span class="speaker">Jamie:</span> Well, at least you got a free dinner out of it.</p>
+      <p><span class="speaker">Alex:</span> There's always a silver lining.</p>
+    </div>
+    <p class="dialogue-note">An original practice dialogue in the show's casual, joking style — not a transcript from the series.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Useful phrases</h2>
+    <div class="phrase-list">
+      <div class="phrase-item"><span class="phrase">no big deal</span><span class="meaning">— not something to worry about</span></div>
+      <div class="phrase-item"><span class="phrase">long story short</span><span class="meaning">— to summarize something quickly</span></div>
+      <div class="phrase-item"><span class="phrase">I'm in</span><span class="meaning">— used to agree to join a plan</span></div>
+      <div class="phrase-item"><span class="phrase">a silver lining</span><span class="meaning">— a positive side to a bad situation</span></div>
+      <div class="phrase-item"><span class="phrase">to be over someone</span><span class="meaning">— to no longer have feelings for a former partner</span></div>
+    </div>
+  </div></section>
+  <div class="wrap"><div class="page-nav">
+    <button onclick="showView('happyness')">&larr; The Pursuit of Happyness</button>
+    <button onclick="showView('sherlock')">Sherlock &rarr;</button>
+  </div></div>
+</div>
+
+<!-- SHERLOCK -->
+<div id="view-sherlock" class="view">
+  <header class="title-header"><div class="wrap">
+    <button class="back-link" onclick="showView('home')">&larr; All titles</button>
+    <div><span class="tag" style="--cat-color:var(--accent-series); margin-top:16px;">Series</span></div>
+    <h1>Sherlock</h1>
+    <p class="hook">Fast, articulate British English built around deduction, evidence, and precise vocabulary.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <h2>About</h2>
+    <p class="about-text">A modern retelling of the classic detective, solving cases through careful observation and logical reasoning. The show is dense with precise, formal vocabulary, delivered quickly — good practice for learners ready to move past basic conversational English toward more sophisticated, structured speech.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Key vocabulary</h2>
+    <div class="vocab-list">
+      <div class="vocab-item"><span class="vocab-term">deduction</span><span class="vocab-def">a conclusion reached through logical reasoning<span class="vocab-example">"His deduction was based on a single detail everyone else missed."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">suspect</span><span class="vocab-def">a person believed to be responsible for a crime<span class="vocab-example">"They had three suspects but no solid evidence."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">crime scene</span><span class="vocab-def">the location where a crime took place<span class="vocab-example">"Nothing at the crime scene had been touched."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">alibi</span><span class="vocab-def">proof that someone was elsewhere when a crime occurred<span class="vocab-example">"His alibi checked out, so they moved on to the next suspect."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">clue</span><span class="vocab-def">a piece of evidence that helps solve a mystery</span></div>
+      <div class="vocab-item"><span class="vocab-term">forensics</span><span class="vocab-def">scientific methods used to investigate crimes</span></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Practice dialogue</h2>
+    <div class="dialogue">
+      <p><span class="speaker">Watts:</span> How could you possibly know he'd been travelling?</p>
+      <p><span class="speaker">Holt:</span> The mud on his shoes. It's only found near the docks.</p>
+      <p><span class="speaker">Watts:</span> That could mean anything.</p>
+      <p><span class="speaker">Holt:</span> Not combined with the receipt in his pocket, dated yesterday.</p>
+      <p><span class="speaker">Watts:</span> You read his pocket?</p>
+      <p><span class="speaker">Holt:</span> I read everything. That's rather the point.</p>
+    </div>
+    <p class="dialogue-note">An original practice dialogue in the show's precise, deductive style — not a transcript from the series.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Useful phrases</h2>
+    <div class="phrase-list">
+      <div class="phrase-item"><span class="phrase">to put two and two together</span><span class="meaning">— to draw an obvious conclusion from available facts</span></div>
+      <div class="phrase-item"><span class="phrase">case closed</span><span class="meaning">— the matter is settled, no more discussion needed</span></div>
+      <div class="phrase-item"><span class="phrase">to read between the lines</span><span class="meaning">— to understand a hidden meaning</span></div>
+      <div class="phrase-item"><span class="phrase">to check out</span><span class="meaning">— (of a fact or alibi) to be confirmed as true</span></div>
+      <div class="phrase-item"><span class="phrase">rather the point</span><span class="meaning">— exactly the reason or purpose of something</span></div>
+    </div>
+  </div></section>
+  <div class="wrap"><div class="page-nav">
+    <button onclick="showView('friends')">&larr; Friends</button>
+    <button onclick="showView('stranger')">Stranger Things &rarr;</button>
+  </div></div>
+</div>
+
+<!-- STRANGER THINGS -->
+<div id="view-stranger" class="view">
+  <header class="title-header"><div class="wrap">
+    <button class="back-link" onclick="showView('home')">&larr; All titles</button>
+    <div><span class="tag" style="--cat-color:var(--accent-series); margin-top:16px;">Series</span></div>
+    <h1>Stranger Things</h1>
+    <p class="hook">1980s small-town America and a supernatural mystery, told through the casual speech of a group of kids.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <h2>About</h2>
+    <p class="about-text">In a quiet American town, a group of kids investigates strange government experiments and a growing supernatural threat. The show blends the informal, playful speech of its young characters with the tenser, more adult language of the adults around them — useful for hearing both registers side by side.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Key vocabulary</h2>
+    <div class="vocab-list">
+      <div class="vocab-item"><span class="vocab-term">supernatural</span><span class="vocab-def">something that cannot be explained by science<span class="vocab-example">"Nobody believed the supernatural explanation at first."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">conspiracy</span><span class="vocab-def">a secret plan by a group, often involving deception<span class="vocab-example">"They suspected a government conspiracy behind the disappearances."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">walkie-talkie</span><span class="vocab-def">a small portable two-way radio<span class="vocab-example">"They stayed in touch using walkie-talkies."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">arcade</span><span class="vocab-def">a place with coin-operated video games<span class="vocab-example">"They spent every Friday at the arcade."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">curfew</span><span class="vocab-def">a set time by which someone must be home<span class="vocab-example">"Her curfew was nine, and she was already late."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">small town</span><span class="vocab-def">a place where everyone tends to know each other</span></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Practice dialogue</h2>
+    <div class="dialogue">
+      <p><span class="speaker">Robin:</span> You hear anything on the walkie-talkie?</p>
+      <p><span class="speaker">Dustin:</span> Just static. Nothing since eight.</p>
+      <p><span class="speaker">Robin:</span> That's not exactly reassuring.</p>
+      <p><span class="speaker">Dustin:</span> I know. But if something happened, we'd know, right?</p>
+      <p><span class="speaker">Robin:</span> I hope so. My curfew was an hour ago.</p>
+      <p><span class="speaker">Dustin:</span> Yeah, mine too. Let's give it five more minutes.</p>
+    </div>
+    <p class="dialogue-note">An original practice dialogue in the show's casual tone — not a transcript from the series.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Useful phrases</h2>
+    <div class="phrase-list">
+      <div class="phrase-item"><span class="phrase">to freak out</span><span class="meaning">— to become very worried or upset</span></div>
+      <div class="phrase-item"><span class="phrase">no way</span><span class="meaning">— expresses disbelief or refusal</span></div>
+      <div class="phrase-item"><span class="phrase">to keep an eye on</span><span class="meaning">— to watch or monitor something</span></div>
+      <div class="phrase-item"><span class="phrase">something's off</span><span class="meaning">— something seems wrong or unusual</span></div>
+      <div class="phrase-item"><span class="phrase">let's give it a shot</span><span class="meaning">— let's try it</span></div>
+    </div>
+  </div></section>
+  <div class="wrap"><div class="page-nav">
+    <button onclick="showView('sherlock')">&larr; Sherlock</button>
+    <button onclick="showView('lis')">Life is Strange &rarr;</button>
+  </div></div>
+</div>
+
+<!-- LIFE IS STRANGE -->
+<div id="view-lis" class="view">
+  <header class="title-header"><div class="wrap">
+    <button class="back-link" onclick="showView('home')">&larr; All titles</button>
+    <div><span class="tag" style="--cat-color:var(--accent-game); margin-top:16px;">Game</span></div>
+    <h1>Life is Strange</h1>
+    <p class="hook">A narrative choice-driven game about teenage life, journaling, and the weight of small decisions.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <h2>About</h2>
+    <p class="about-text">A teenage photography student discovers she can rewind time and uses this ability while navigating friendship, choices, and a small-town mystery in the Pacific Northwest. The game's script leans heavily on natural teenage speech and internal narration, making it good practice for informal, expressive English.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Key vocabulary</h2>
+    <div class="vocab-list">
+      <div class="vocab-item"><span class="vocab-term">flashback</span><span class="vocab-def">a scene depicting an earlier event<span class="vocab-example">"The flashback explained why she never trusted him again."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">to rewind</span><span class="vocab-def">to go backward in time or in a recording<span class="vocab-example">"She could rewind a few minutes to undo a mistake."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">consequence</span><span class="vocab-def">a result of an earlier action or decision<span class="vocab-example">"Every choice had a consequence she couldn't always predict."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">journal</span><span class="vocab-def">a personal notebook for recording thoughts and events<span class="vocab-example">"She wrote in her journal almost every night."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">small-town</span><span class="vocab-def">typical of a place where few things stay secret</span></div>
+      <div class="vocab-item"><span class="vocab-term">photography</span><span class="vocab-def">the art or practice of taking photographs</span></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Practice dialogue</h2>
+    <div class="dialogue">
+      <p><span class="speaker">Max:</span> If I could take it back, I would.</p>
+      <p><span class="speaker">Chloe:</span> You can't rewind everything, you know.</p>
+      <p><span class="speaker">Max:</span> I know. I just wish I did.</p>
+      <p><span class="speaker">Chloe:</span> Some things you just have to live with.</p>
+      <p><span class="speaker">Max:</span> That's the part I'm still figuring out.</p>
+    </div>
+    <p class="dialogue-note">An original practice dialogue in the game's reflective, informal tone — not a transcript from the game.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Useful phrases</h2>
+    <div class="phrase-list">
+      <div class="phrase-item"><span class="phrase">to take something back</span><span class="meaning">— to undo or retract something said or done</span></div>
+      <div class="phrase-item"><span class="phrase">to live with something</span><span class="meaning">— to accept and continue despite a difficult outcome</span></div>
+      <div class="phrase-item"><span class="phrase">to figure something out</span><span class="meaning">— to understand or solve something over time</span></div>
+      <div class="phrase-item"><span class="phrase">it's not that simple</span><span class="meaning">— used when a situation has more complexity than it seems</span></div>
+      <div class="phrase-item"><span class="phrase">no matter what</span><span class="meaning">— regardless of the circumstances</span></div>
+    </div>
+  </div></section>
+  <div class="wrap"><div class="page-nav">
+    <button onclick="showView('stranger')">&larr; Stranger Things</button>
+    <button onclick="showView('portal')">Portal 2 &rarr;</button>
+  </div></div>
+</div>
+
+<!-- PORTAL 2 -->
+<div id="view-portal" class="view">
+  <header class="title-header"><div class="wrap">
+    <button class="back-link" onclick="showView('home')">&larr; All titles</button>
+    <div><span class="tag" style="--cat-color:var(--accent-game); margin-top:16px;">Game</span></div>
+    <h1>Portal 2</h1>
+    <p class="hook">A puzzle game narrated by a dry, sarcastic AI — great for picking up irony, understatement, and technical phrasing.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <h2>About</h2>
+    <p class="about-text">Trapped in an abandoned testing facility, the player solves physics-based puzzles while a sarcastic artificial intelligence provides a near-constant stream of commentary. The writing is precise and often ironic, which makes it useful for learners who already have solid basics and want to pick up on tone, dry humor, and technical vocabulary.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Key vocabulary</h2>
+    <div class="vocab-list">
+      <div class="vocab-item"><span class="vocab-term">test chamber</span><span class="vocab-def">a room designed for running a controlled experiment<span class="vocab-example">"The next test chamber requires two portals instead of one."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">artificial intelligence</span><span class="vocab-def">a computer system able to perform tasks that normally require human thought<span class="vocab-example">"The artificial intelligence running the facility had its own agenda."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">sarcasm</span><span class="vocab-def">saying something ironic, often to mock or joke<span class="vocab-example">"It was hard to tell when the sarcasm ended and the threat began."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">protocol</span><span class="vocab-def">a fixed set of rules or procedures<span class="vocab-example">"Standard protocol required a full facility reset."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">gravity</span><span class="vocab-def">the force that pulls objects toward the ground</span></div>
+      <div class="vocab-item"><span class="vocab-term">momentum</span><span class="vocab-def">the force an object has because of its motion</span></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Practice dialogue</h2>
+    <div class="dialogue">
+      <p><span class="speaker">System:</span> Congratulations. You've completed the chamber in record time.</p>
+      <p><span class="speaker">Subject:</span> Thanks. Was that meant to be a compliment?</p>
+      <p><span class="speaker">System:</span> It was a fact. I don't do compliments.</p>
+      <p><span class="speaker">Subject:</span> Could've fooled me.</p>
+      <p><span class="speaker">System:</span> Please proceed to the next chamber. Try not to disappoint me twice.</p>
+    </div>
+    <p class="dialogue-note">An original practice dialogue in the game's dry, sarcastic style — not a transcript from the game.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Useful phrases</h2>
+    <div class="phrase-list">
+      <div class="phrase-item"><span class="phrase">could've fooled me</span><span class="meaning">— used sarcastically to say something wasn't obvious at all</span></div>
+      <div class="phrase-item"><span class="phrase">to proceed with something</span><span class="meaning">— to continue or move forward with an action</span></div>
+      <div class="phrase-item"><span class="phrase">for the record</span><span class="meaning">— used to state a fact clearly, often for later reference</span></div>
+      <div class="phrase-item"><span class="phrase">to take it personally</span><span class="meaning">— to feel offended by something not necessarily meant that way</span></div>
+      <div class="phrase-item"><span class="phrase">easier said than done</span><span class="meaning">— something that sounds simple but is hard to actually do</span></div>
+    </div>
+  </div></section>
+  <div class="wrap"><div class="page-nav">
+    <button onclick="showView('lis')">&larr; Life is Strange</button>
+    <button onclick="showView('tlou')">The Last of Us Part II &rarr;</button>
+  </div></div>
+</div>
+
+<!-- THE LAST OF US PART II -->
+<div id="view-tlou" class="view">
+  <header class="title-header"><div class="wrap">
+    <button class="back-link" onclick="showView('home')">&larr; All titles</button>
+    <div><span class="tag" style="--cat-color:var(--accent-game); margin-top:16px;">Game</span></div>
+    <h1>The Last of Us Part II</h1>
+    <p class="hook">A post-apocalyptic survival drama with mature themes — vocabulary around loss, loyalty, and survival.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <h2>About</h2>
+    <p class="about-text">Set years after a fungal outbreak has devastated society, the story follows characters driven by grief and a desire for revenge across a dangerous, overgrown America. The writing is heavier and more emotional than the other titles here, offering vocabulary around difficult, adult themes alongside survival and combat terms.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Key vocabulary</h2>
+    <div class="vocab-list">
+      <div class="vocab-item"><span class="vocab-term">survival</span><span class="vocab-def">the state of continuing to live despite danger<span class="vocab-example">"Survival meant trusting almost no one."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">infected</span><span class="vocab-def">carrying or affected by a disease<span class="vocab-example">"The infected had taken over most of the city."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">revenge</span><span class="vocab-def">an action taken to punish someone for a past wrong<span class="vocab-example">"Revenge was the only thing keeping her going."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">wasteland</span><span class="vocab-def">a place that has been destroyed or abandoned<span class="vocab-example">"The city had become an overgrown wasteland."</span></span></div>
+      <div class="vocab-item"><span class="vocab-term">loyalty</span><span class="vocab-def">strong, continued support for someone</span></div>
+      <div class="vocab-item"><span class="vocab-term">grief</span><span class="vocab-def">deep sorrow, especially after a loss</span></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Practice dialogue</h2>
+    <div class="dialogue">
+      <p><span class="speaker">Ellie:</span> We could still turn back. Nobody would know.</p>
+      <p><span class="speaker">Dina:</span> I'd know. And so would you.</p>
+      <p><span class="speaker">Ellie:</span> Maybe that's enough reason to stop.</p>
+      <p><span class="speaker">Dina:</span> Is it? After everything we lost?</p>
+      <p><span class="speaker">Ellie:</span> I don't know anymore. I just know we can't stay here.</p>
+    </div>
+    <p class="dialogue-note">An original practice dialogue in the game's tense, emotional tone — not a transcript from the game.</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2>Useful phrases</h2>
+    <div class="phrase-list">
+      <div class="phrase-item"><span class="phrase">to turn back</span><span class="meaning">— to stop and return the way you came</span></div>
+      <div class="phrase-item"><span class="phrase">to hold a grudge</span><span class="meaning">— to continue feeling angry about something in the past</span></div>
+      <div class="phrase-item"><span class="phrase">to let go</span><span class="meaning">— to stop holding on to anger, pain, or the past</span></div>
+      <div class="phrase-item"><span class="phrase">there's no turning back</span><span class="meaning">— a decision or action can no longer be reversed</span></div>
+      <div class="phrase-item"><span class="phrase">to watch someone's back</span><span class="meaning">— to protect or look out for someone</span></div>
+    </div>
+  </div></section>
+  <div class="wrap"><div class="page-nav">
+    <button onclick="showView('portal')">&larr; Portal 2</button>
+    <button onclick="showView('forrest-gump')">Forrest Gump &rarr;</button>
+  </div></div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">Built for practicing English through stories.</div>
+</footer>
+
+<script>
+function showView(name) {
+  document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+  document.getElementById('view-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function filterCards(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('#card-grid .card').forEach(function(card){
+    var match = filter === 'all' || card.getAttribute('data-cat') === filter;
+    card.style.display = match ? 'flex' : 'none';
+  });
+}
+</script>
+</body>
+</html>
