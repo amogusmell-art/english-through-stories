@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exhibition Stand - Learning English Through Fantasy Worlds</title>
+<style>
+  @page { size: A3 landscape; margin: 6mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+  body { background: #ffffff; padding: 0; }
+  table.board {
+    width: 1200px;
+    height: 850px;
+    background: #ffffff;
+    border-collapse: collapse;
+    border: 2.5px solid #1e293b;
+    table-layout: fixed;
+  }
+  td.panel { vertical-align: top; padding: 10px; }
+  td.panel-left { width: 25%; background: #f8fafc; border-right: 2px dashed #94a3b8; }
+  td.panel-center { width: 50%; background: #ffffff; }
+  td.panel-right { width: 25%; background: #f8fafc; border-left: 2px dashed #94a3b8; }
+  .box {
+    border: 1.5px solid #cbd5e1;
+    border-radius: 5px;
+    padding: 8px 10px;
+    background: #ffffff;
+    font-size: 11px;
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+  .box-last { margin-bottom: 0; }
+  .box-title {
+    font-weight: 700;
+    font-size: 11.5px;
+    color: #0f172a;
+    background: #e2e8f0;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .title-box {
+    background: #1e3a8a;
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+  .title-box h1 { font-size: 18px; margin-bottom: 4px; }
+  .title-box p { font-size: 10.5px; color: #dbeafe; }
+  .main-banner {
+    background: #0f766e;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  table.charts-table {
+    width: 100%;
+    background: #f1f5f9;
+    border-radius: 5px;
+    margin: 6px 0;
+    text-align: center;
+    padding: 6px;
+  }
+  table.charts-table td { vertical-align: middle; padding: 3px; }
+  .chart-label { font-size: 10px; font-weight: 700; color: #0f172a; margin-top: 2px; }
+  .chart-sub { font-size: 9px; color: #475569; }
+  ul { padding-left: 15px; }
+  li { margin-bottom: 3px; }
+  table.photos-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 8px 0;
+    margin-top: 6px;
+  }
+  td.photo-slot {
+    width: 50%;
+    height: 155px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 0;
+    background: #f8fafc;
+  }
+  td.photo-slot img {
+    width: 100%;
+    height: 155px;
+    object-fit: cover;
+    display: block;
+  }
+  .qr-box { text-align: center; }
+  .qr-box img { width: 115px; height: 115px; margin: 4px auto; display: block; }
+  @media print {
+    body { background: none; padding: 0; }
+    table.board { width: 100%; height: 284mm; }
+  }
+</style>
+</head>
+<body>
+
+<table class="board">
+  <tr>
+    <td class="panel panel-left">
+      <div class="box">
+        <div class="box-title">Relevance</div>
+        <p>Modern youth spend massive amounts of free time inside English-language fantasy worlds (RPGs, films, long-running series) without realizing their educational value. A single role-playing game contains over <b>20,000 words</b>. Fantasy builds rich invented vocabularies, repeating lexis, and emotional engagement, turning casual entertainment into natural, incidental language practice.</p>
+      </div>
+      <div class="box">
+        <div class="box-title">Goal</div>
+        <p>To investigate whether narrative, dialogue-rich fantasy media (games, films, and series) supports incidental English vocabulary acquisition through context and repetition more effectively than unsystematic media consumption.</p>
+      </div>
+      <div class="box">
+        <div class="box-title">Objectives</div>
+        <ul>
+          <li>Review research on how video games, films, and series affect second-language acquisition.</li>
+          <li>Explain why the fantasy genre supports durable incidental vocabulary retention.</li>
+          <li>Build the practical web platform <i>«English Through Stories»</i> pairing fantasy titles with vocabulary.</li>
+          <li>Conduct two-stage testing (May baseline vs. post-summer) and a Google Forms learner survey.</li>
+          <li>Formulate practical recommendations for learners.</li>
+        </ul>
+      </div>
+      <div class="box box-last" style="height: 220px;">
+        <div class="box-title">Methods</div>
+        <ul>
+          <li><b>Theoretical:</b> Literature review and comparative analysis (traditional classroom vs. immersive media learning).</li>
+          <li><b>Engineering:</b> Single-file HTML web development hosted openly via GitHub.</li>
+          <li><b>Empirical:</b> Two-stage pedagogical testing (May baseline &amp; post-summer) and Google Forms learner surveying (n = 11).</li>
+        </ul>
+      </div>
+    </td>
+
+    <td class="panel panel-center">
+      <div class="title-box">
+        <h1>LEARNING ENGLISH THROUGH FANTASY WORLDS</h1>
+        <p><b>Author:</b> Magzum Arlan, Grade 9 | Taldykorgan Specialized Boarding Lyceum «BILIM-INNOVATION»<br>
+        <b>Section:</b> Linguistics (English) | <b>Mentor:</b> Torgayeva Elvira | <b>Advisor:</b> Dyussebayeva S.</p>
+      </div>
+      <div class="box">
+        <div class="box-title">Research Problem &amp; Hypothesis</div>
+        <p><b>Problem:</b> How can popular videogames, films, and series be transformed into structured, self-directed language acquisition tools?<br>
+        <b>Hypothesis:</b> Narrative, dialogue-rich fantasy games and series teach English more effectively than passive media consumption because understanding the language is <i>functionally necessary</i> to follow the plot — not an optional extra.</p>
+      </div>
+      <div class="main-banner">MAIN RESULT</div>
+      <div class="box">
+        <div class="box-title">1. Facts &amp; Empirical Data</div>
+        <p><b>Summer Experiment:</b> Students completed a baseline English test in May, used the <i>«English Through Stories»</i> website and fantasy media during summer break, and took a post-test. Scores rose by <b>+32.5%</b> (from <b>55%</b> to <b>87.5%</b>).</p>
+        <table class="charts-table">
+          <tr>
+            <td style="width: 38%;">
+              <svg width="68" height="68" viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15.915" fill="#cbd5e1"></circle>
+                <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#fbbf24" stroke-width="31.83" stroke-dasharray="55 45" stroke-dashoffset="25"></circle>
+                <text x="18" y="20.5" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0f172a">55%</text>
+              </svg>
+              <div class="chart-label">INITIAL TEST (May)</div>
+              <div class="chart-sub">Range: 50–60%</div>
+            </td>
+            <td style="width: 24%; font-size: 15px; font-weight: bold; color: #0f766e;">&#10132; +32.5% &#10132;</td>
+            <td style="width: 38%;">
+              <svg width="68" height="68" viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15.915" fill="#cbd5e1"></circle>
+                <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#2dd4bf" stroke-width="31.83" stroke-dasharray="87.5 12.5" stroke-dashoffset="25"></circle>
+                <text x="18" y="20.5" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0f172a">87.5%</text>
+              </svg>
+              <div class="chart-label">POST-TEST (After Summer)</div>
+              <div class="chart-sub">Range: 85–90%</div>
+            </td>
+          </tr>
+        </table>
+        <p><b>Learner Survey (n = 11):</b> <b>63.6%</b> (7/11) learned English via movies, series, and games; <b>27.3%</b> (3/11) credited school alone; <b>0%</b> credited dedicated language apps (e.g., Duolingo).</p>
+      </div>
+      <div class="box">
+        <div class="box-title">2. Author's Analysis</div>
+        <p>Interactivity alone does not guarantee acquisition; comprehension must be required to advance the story. Narrative fantasy induces a psychological <i>«state of flow»</i> across four core skills: <b>Vocabulary</b> (contextual repetition), <b>Listening</b> (natural pace &amp; reduced subtitle reliance), <b>Speaking</b> (multiplayer voice/text chat), and <b>Culture</b> (humour, idioms, and storytelling conventions).</p>
+      </div>
+      <div class="box box-last" style="height: 225px;">
+        <div class="box-title">3. Website Demonstration &amp; Contribution</div>
+        <p>Developed the self-contained web platform <b>«English Through Stories»</b> categorizing <b>Movies</b> (<i>Inception</i>), <b>Series</b> (<i>Sherlock, Stranger Things</i>), and <b>Games</b> (<i>Detroit: Become Human, Life is Strange, Portal 2</i>) with level notes and dialogues.</p>
+        <table class="photos-table">
+          <tr>
+            <td class="photo-slot">
+              <img src="https://ibb.co" alt="Classroom Presentation">
+            </td>
+            <td class="photo-slot">
+              <img src="https://ibb.co" alt="Student Testing">
+            </td>
+          </tr>
+        </table>
+      </div>
+    </td>
+
+    <td class="panel panel-right">
+      <div class="box">
+        <div class="box-title">Conclusions</div>
+        <ul>
+          <li>Fantasy media does not replace classroom lessons, but serves as a powerful practical supplement.</li>
+          <li>Summer immersion using the project website raised test performance from <b>55% to 87.5%</b> (+32.5%).</li>
+          <li>Incidental learning is strongest when understanding dialogue is essential to follow the plot.</li>
+          <li>Simple, open-source architecture ensures reliable learner access.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="box-title">Practical Significance</div>
+        <p>Created an open-source learning hub and a <b>4-level content guide</b> (<i>Elementary</i> to <i>Upper-Intermediate</i>) with learner tips:</p>
+        <ul>
+          
